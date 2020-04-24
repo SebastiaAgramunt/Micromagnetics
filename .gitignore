@@ -1,6 +1,8 @@
 **/*.ipynb_checkpoints
 **/*.pyc
 **/*.swp
+**/__pycache__
+**/.pytest_cache
 *.egg-info
 *.gz
 *.idea
@@ -18,8 +20,6 @@
 .coverage
 .eggs
 .env
-__pycache__
-.pytest_cache
 .tenv
 .vscode
 env
