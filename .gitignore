@@ -1,7 +1,7 @@
 **/*.ipynb_checkpoints
 **/*.pyc
 **/*.swp
-**/__pycache__
+**__pycache__
 **/.pytest_cache
 *.egg-info
 *.gz
