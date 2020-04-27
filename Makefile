@@ -1,5 +1,7 @@
 .SILENT:
+.PHONY: init test
 .DEFAULT_GOAL := help
+
 
 PROJECT := Micromagnetics Simulation Software (Author Sebastia Agramunt)
 
@@ -9,10 +11,22 @@ COLOR_YELLOW = \033[33m
 COLOR_GREEN = \033[32m
 COLOR_RED = \033[31m
 
+
+# Install all required packages (library and testing)
+init:
+	pip install -r requirements.txt
+	pip install -r requirements.test.txt
+	pip install -e .
+
+
 ## Make software tests
-testing:
+test:
 	py.test -v
 	#python -m unittest discover -v
+
+## Coverage of testing
+coverage:
+	pytest --cov=mmag test/
 
 ## Prints help message
 help:
