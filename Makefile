@@ -18,7 +18,6 @@ init:
 	pip install -r requirements.test.txt
 	pip install -e .
 
-
 ## Make software tests
 test:
 	py.test -v
