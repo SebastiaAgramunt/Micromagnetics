@@ -19,5 +19,5 @@ class AbstractCell(ABC):
         pass
 
     @abstractmethod
-    def unit_field(self):
+    def unit_field(self, r: np.array, m: np.array):
         pass

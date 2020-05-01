@@ -1,4 +1,5 @@
 from .base import AbstractCell
+from .fields import field_rectangular_box
 import numpy as np
 
 
@@ -24,12 +25,13 @@ class Cuboid(AbstractCell):
     def face_positions(self):
         return self.__face_positions
 
-    def unit_field(self):
-        pass
+    def unit_field(self, r, m):
+        return field_rectangular_box(self.position, self.__delta, m, r)
 
     def __str__(self):
         m = f"Cuboid object at {hex(id(self))}\n\t"
         m+= f"Center: [{self.position[0]}, {self.position[1]}, {self.position[2]}]"
         for elem in self.__face_positions:
-            m += f"\n\tFace {elem}: [{self.__face_positions[elem][0]}, {self.__face_positions[elem][1]}, {self.__face_positions[elem][2]}]"
+            m += f"\n\tFace {elem}: [{self.__face_positions[elem][0]}, {self.__face_positions[elem][1]}," \
+                 f" {self.__face_positions[elem][2]}]"
         return m

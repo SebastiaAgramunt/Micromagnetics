@@ -16,7 +16,3 @@ if __name__ == "__main__":
 
     dip = field_dipole(rp, m, r)
     f = field_rectangular_box(rp, d, m, r)
-    print(dip)
-    print(f)
-    print(type(dip))
-    print(type(f))
