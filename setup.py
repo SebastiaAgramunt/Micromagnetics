@@ -4,10 +4,11 @@ import sys
 from setuptools import setup, find_packages
 
 base_dir = os.path.dirname(__file__)
-src_dir = os.path.join(base_dir, 'mmag')
+src_dir = os.path.join(base_dir, 'src')
 sys.path.insert(0, src_dir)
 
 import mmag
+
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -26,8 +27,8 @@ setup(
     author='Sebastia Agramunt Puig',
     lisense='',
     author_email='sebasvinaros@gmail.com',
-    packages=find_packages(where='mmag', exclude=['tests']),
-    package_dir={'': 'mmag'},
+    packages=find_packages(where='src', exclude=['tests']),
+    package_dir={'': 'src'},
     install_requires=get_requirements(),
     setup_requires=['pytest-runner', 'wheel'],
     testsp_require=get_requirements('requirements.test.txt'),

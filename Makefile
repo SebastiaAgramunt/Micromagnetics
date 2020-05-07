@@ -25,7 +25,7 @@ test:
 
 ## Coverage of testing
 coverage:
-	pytest --cov=mmag test/
+	pytest --cov-fail-under=80 --cov=mmag test/
 
 ## Prints help message
 help:

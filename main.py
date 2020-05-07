@@ -1,5 +1,5 @@
-from mmag.unit_cell.cell import Cuboid
-from mmag.unit_cell.fields import field_dipole, field_rectangular_box
+from src import Cuboid
+from src import field_dipole, field_rectangular_box
 import numpy as np
 
 if __name__ == "__main__":

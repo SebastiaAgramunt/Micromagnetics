@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from mmag.unit_cell.fields import field_dipole
-from mmag.unit_cell.cell import Cuboid
+from mmag.unit_cell import field_dipole
+from mmag.unit_cell import Cuboid
 
 _acc = 0.0001
 
@@ -115,7 +115,7 @@ class TestCubicCellDifferentDirections(unittest.TestCase):
         self.assertTrue(np.fabs(dipole_field[2] - box_field[2]) < _acc)
 
     def test_magnetic_field_3(self):
-        # Testing field unirormly magnetized in Z
+        # Testing field uniformly magnetized in Z
 
         m = np.array([1.0 / np.sqrt(3.0), 1.0 / np.sqrt(3.0), 1.0 / np.sqrt(3.0)], dtype=np.float64)
         r = np.array([1.0, 5.0, 2.0], dtype=np.float64)
@@ -131,6 +131,7 @@ class TestCubicCellDifferentDirections(unittest.TestCase):
         self.assertTrue(np.fabs(dipole_field[1] - box_field[1]) < _acc)
         self.assertTrue(np.fabs(dipole_field[2] - box_field[2]) < _acc)
 
+
 class TestCubicCellNotOrigin(unittest.TestCase):
     def setUp(self):
         position = np.array([3.0, 1.0, 5.0], dtype=np.float64)
@@ -141,7 +142,7 @@ class TestCubicCellNotOrigin(unittest.TestCase):
         # Testing field unirormly magnetized in Z
 
         m = np.array([1.0/np.sqrt(3.0), 1.0/np.sqrt(3.0), 1.0/np.sqrt(3.0)], dtype=np.float64)
-        r = np.array([.5, -2.0, 3.0], dtype=np.float64)
+        r = np.array([0.6, 0.0, 1.0], dtype=np.float64)
 
         dipole_field = field_dipole(self.init_obj.position, m, r)
         box_field = self.init_obj.unit_field(r, m)
@@ -156,6 +157,7 @@ class TestCubicCellNotOrigin(unittest.TestCase):
         self.assertTrue(np.fabs(dipole_field[0] - box_field[0]) < _acc)
         self.assertTrue(np.fabs(dipole_field[1] - box_field[1]) < _acc)
         self.assertTrue(np.fabs(dipole_field[2] - box_field[2]) < _acc)
+
 
 if __name__ == '__main__':
     unittest.main()
