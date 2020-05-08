@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from mmag.unit_cell import field_dipole
-from mmag.unit_cell import Cuboid
+from mmag.unit_cell.fields import field_dipole
+from mmag.unit_cell.cell import Cuboid
 
 _acc = 0.0001
 
@@ -134,7 +134,7 @@ class TestCubicCellDifferentDirections(unittest.TestCase):
 
 class TestCubicCellNotOrigin(unittest.TestCase):
     def setUp(self):
-        position = np.array([3.0, 1.0, 5.0], dtype=np.float64)
+        position = np.array([1.0, 2.0, 3.0], dtype=np.float64)
         delta = np.array([1.0, 1.0, 1.0], dtype=np.float64)
         self.init_obj = Cuboid(position, delta)
 
@@ -142,7 +142,7 @@ class TestCubicCellNotOrigin(unittest.TestCase):
         # Testing field unirormly magnetized in Z
 
         m = np.array([1.0/np.sqrt(3.0), 1.0/np.sqrt(3.0), 1.0/np.sqrt(3.0)], dtype=np.float64)
-        r = np.array([0.6, 0.0, 1.0], dtype=np.float64)
+        r = np.array([7.0, 8.0, 7.0], dtype=np.float64)
 
         dipole_field = field_dipole(self.init_obj.position, m, r)
         box_field = self.init_obj.unit_field(r, m)

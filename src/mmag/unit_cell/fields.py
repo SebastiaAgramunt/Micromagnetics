@@ -1,5 +1,11 @@
 import numpy as np
 
+_coefs = [(1, 0, 0), (0, 1, 0),
+          (0, 0, 1), (1, 1, 0),
+          (1, 0, 1), (0, 1, 1),
+          (1, 1, 1), (0, 0, 0)]
+
+
 def field_dipole(rp: np.array, m: np.array, r: np.array):
     """
 
@@ -10,7 +16,7 @@ def field_dipole(rp: np.array, m: np.array, r: np.array):
     """
     r_ = r-rp
 
-    m_ = 3.0*r*m.dot(r_)/np.power(r_.dot(r_), 5.0/2.0) - m/np.power(r_.dot(r_), 3.0/2.0)
+    m_ = 3.0*r_*m.dot(r_)/np.power(r_.dot(r_), 5.0/2.0) - m/np.power(r_.dot(r_), 3.0/2.0)
     return m_/(4.0*np.pi)
 
 
@@ -38,11 +44,6 @@ def _interaction_matrix(rp: np.array, d: np.array, r: np.array):
 
     return I
 
-
-_coefs = [(1, 0, 0), (0, 1, 0),
-          (0, 0, 1), (1, 1, 0),
-          (1, 0, 1), (0, 1, 1),
-          (1, 1, 1), (0, 0, 0)]
 
 def _hzz(x_c: np.float64, y_c:np.float64, z_c: np.float64, dx: np.float64, dy: np.float64, dz: np.float64,
          x: np.float64, y: np.float64, z: np.float64):
