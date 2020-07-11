@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import numpy as np
 
+
 class AbstractCell(ABC):
     """
     An abstract class to predict in a model

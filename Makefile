@@ -2,11 +2,16 @@
 .PHONY: init test build
 .DEFAULT_GOAL := help
 
-PROJECT := Micromagnetics Simulation Software (Author Sebastia Agramunt)
+PROJECT := Micromagnetics Simulation Software (Author Sebastia Agramunt Puig)
 
 IMAGE_NAME=micromagnetics
 CONTAINER_NAME=mumag
 PORT=8888
+
+VENV_DIR=mmag_env
+VENV_DEV=mmag_env_dev
+
+CODE_PATH=src
 
 COLOR_RESET = \033[0m
 COLOR_COMMAND = \033[36m
@@ -14,12 +19,20 @@ COLOR_YELLOW = \033[33m
 COLOR_GREEN = \033[32m
 COLOR_RED = \033[31m
 
+# install package and create virtual environment
+setup:
+	bash setup.sh $(VENV_DIR)
 
-## Install all required packages (library and testing)
-init:
-	pip install -r requirements.txt
+# install package and new virtual environment for development
+setup-dev:
+	bash setup.sh $(VENV_DEV)
 	pip install -r requirements.test.txt
 	pip install -e .
+
+## check code format
+format:
+	autoflake --recursive --in-place $(CODE_PATH)
+	black $(CODE_PATH)
 
 ## Make software tests
 test:
@@ -61,7 +74,7 @@ remove: stop
 	docker rmi $(IMAGE_NAME)
 ## Prints help message
 help:
-	printf "\n${COLOR_YELLOW}${PROJECT}\n-------------------------------------------------------------\n${COLOR_RESET}"
+	printf "\n${COLOR_YELLOW}${PROJECT}\n-------------------------------------------------------------------\n${COLOR_RESET}"
 	awk '/^[a-zA-Z\-\_0-9\.%]+:/ { \
 		helpMessage = match(lastLine, /^## (.*)/); \
 		if (helpMessage) { \
