@@ -13,7 +13,7 @@ import mmag
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-def get_requirements(requirements_path='requirements.txt'):
+def get_requirements(requirements_path='./pip-dep/requirements.txt'):
     with open(requirements_path) as fp:
         return [x.strip() for x in fp.read().split('\n') if not x.startswith('#')]
 
@@ -31,7 +31,7 @@ setup(
     package_dir={'': 'src'},
     install_requires=get_requirements(),
     setup_requires=['pytest-runner', 'wheel'],
-    testsp_require=get_requirements('requirements.test.txt'),
+    testsp_require=get_requirements('./pip-dep/requirements.test.txt'),
     url='https://github.com/SebastiaAgramunt/Micromagnetics',
     classifiers=[
         'Programming Language :: Python :: 3.8.0'

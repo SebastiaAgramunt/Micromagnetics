@@ -3,8 +3,8 @@ FROM python:3.7.5
 # Updating repository sources
 RUN apt-get update
 
-COPY requirements.txt /tmp/
-COPY requirements.notebook.txt /tmp/
+COPY ./pip-dep/requirements.txt /tmp/
+COPY ./pip-dep/requirements.notebook.txt /tmp/
 RUN pip install --upgrade pip
 RUN pip install --requirement /tmp/requirements.txt
 RUN pip install --requirement /tmp/requirements.notebook.txt

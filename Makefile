@@ -1,15 +1,8 @@
 .SILENT:
-.PHONY: init test build
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := list
 
-PROJECT := Micromagnetics Simulation Software (Author Sebastia Agramunt Puig)
-
-IMAGE_NAME=micromagnetics
-CONTAINER_NAME=mumag
-PORT=8888
-
-VENV_DIR=mmag_env
-VENV_DEV=mmag_env_dev
+AUTHOR := Sebastia Agramunt Puig
+PROJECT := Micromagnetics Simulation Software (Author ${AUTHOR})
 
 CODE_PATH=src
 
@@ -19,69 +12,32 @@ COLOR_YELLOW = \033[33m
 COLOR_GREEN = \033[32m
 COLOR_RED = \033[31m
 
-# install package and create virtual environment
-setup:
-	bash setup.sh $(VENV_DIR)
-
-# install package and new virtual environment for development
-setup-dev:
-	bash setup.sh $(VENV_DEV)
-	pip install -r requirements.test.txt
+.PHONY: bootstrap # : install all requirements needed
+bootstrap:
+	pip install --upgrade pip
+	pip install -r ./pip-dep/requirements.txt
+	pip install -r ./pip-dep/requirements.test.txt
+	pip install -r ./pip-dep/requirements.notebook.txt
 	pip install -e .
 
-## check code format
+
+.PHONY: format # : check code format
 format:
 	autoflake --recursive --in-place $(CODE_PATH)
 	black $(CODE_PATH)
 
-## Make software tests
+.PHONY: test # : run software tests
 test:
 	py.test -v
 	#python -m unittest discover -v
 
-## Coverage of testing
+.PHONY: coverage # : check for coverage
 coverage:
 	pytest --cov-fail-under=80 --cov=mmag test/
 
-## Build docker image
-build:
-	@echo "${COLOR_GREEN}----\nBuilding docker image ${IMAGE_NAME}...\n----\n${COLOR_RESET}"
-	docker build -t $(IMAGE_NAME) .
 
-## Run docker image on a container
-run:
-	@echo "${COLOR_GREEN}----\nBuilding container ${CONTAINER_NAME} and running...\n----\n${COLOR_RESET}"
-	docker run -d -v $(shell pwd):/home/ -p 8888:8888 --name $(CONTAINER_NAME) -i $(IMAGE_NAME)
 
-## Build docker image and run it in container
-build-run: build run
-
-## Stop docker container
-stop:
-	@echo "${COLOR_GREEN}----\nStopping container ${CONTAINER_NAME}...\n----\n${COLOR_RESET}"
-	docker stop $(CONTAINER_NAME)
-
-## Start the docker container
-start:
-	@echo "${COLOR_GREEN}----\nStarting container ${CONTAINER_NAME}...\n----\n${COLOR_RESET}"
-	docker start $(CONTAINER_NAME)
-
-## Stop docker container and remove containers and images
-remove: stop
-	@echo "${COLOR_GREEN}----\nStopping container ${CONTAINER_NAME}...\n----\n${COLOR_RESET}"
-	docker rm $(CONTAINER_NAME)
-	@echo "${COLOR_GREEN}----\nRemoving Image ${IMAGE_NAME}...\n----\n${COLOR_RESET}"
-	docker rmi $(IMAGE_NAME)
-## Prints help message
-help:
+.PHONY: list # : Makefile command list
+list:
 	printf "\n${COLOR_YELLOW}${PROJECT}\n-------------------------------------------------------------------\n${COLOR_RESET}"
-	awk '/^[a-zA-Z\-\_0-9\.%]+:/ { \
-		helpMessage = match(lastLine, /^## (.*)/); \
-		if (helpMessage) { \
-			helpCommand = substr($$1, 0, index($$1, ":")); \
-			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "${COLOR_COMMAND}$$ make %s${COLOR_RESET} %s\n", helpCommand, helpMessage; \
-		} \
-	} \
-	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort
-	printf "\n"
+	@grep '^.PHONY: .* #' Makefile | sed 's/\.PHONY: \(.*\) # \(.*\)/\1 \2/' | expand -t20
