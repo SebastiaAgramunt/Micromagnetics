@@ -2,22 +2,12 @@
 name: Micromagnetics CI
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
     branches:
       - master
   pull_request:
     branches:
       - master
-
-#on: [push]
-# on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
-
 
 jobs:
   ubuntu-ci:
