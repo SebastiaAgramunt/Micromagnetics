@@ -29,7 +29,7 @@ jobs:
         make bootstrap
     - name: Lint
       run: |
-        make lint
+        make format
     - name: Test with pytest
       run: |
-        make check
+        make test
