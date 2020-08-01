@@ -30,6 +30,7 @@ if __name__ == "__main__":
     # box_field = cub.unit_field(r, m)
     # print(box_field, dipole_field)
 
+
     position = np.array([0.0, 0.0, 0.0], dtype=np.float64)
     m = np.array([1.0 / np.sqrt(3.0), 1.0 / np.sqrt(3.0), 1.0 / np.sqrt(3.0)], dtype=np.float64)
     r = np.array([2.0, 3.0, 4.0], dtype=np.float64)
