@@ -14,6 +14,7 @@
 *.xml
 *.zip
 *.bson
+venv*/
 .DS_Store
 .RData
 .Rhistory
