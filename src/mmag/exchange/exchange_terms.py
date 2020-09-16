@@ -41,35 +41,53 @@ def _m_second_derivative(
             f"stencil and m values have to be same lenght:\n{len(stencilx)}=={len(m_xdirection)}\n{len(stencily)}=={len(m_ydirection)}\n{len(stencilz)}=={len(m_zdirection)}"
         )
 
-    m2xx = numeric_derivative_io(
-        [m[0] for m in m_xdirection], stencilx, grid_spacing_x, 2
-    )
-    m2xy = numeric_derivative_io(
-        [m[0] for m in m_ydirection], stencily, grid_spacing_y, 2
-    )
-    m2xz = numeric_derivative_io(
-        [m[0] for m in m_zdirection], stencilz, grid_spacing_z, 2
-    )
+    if len(m_xdirection) > 2:
 
-    m2yx = numeric_derivative_io(
-        [m[1] for m in m_xdirection], stencilx, grid_spacing_x, 2
-    )
-    m2yy = numeric_derivative_io(
-        [m[1] for m in m_ydirection], stencily, grid_spacing_y, 2
-    )
-    m2yz = numeric_derivative_io(
-        [m[1] for m in m_zdirection], stencilz, grid_spacing_z, 2
-    )
+        m2xx, _ = numeric_derivative_io(
+            [m[0] for m in m_xdirection], stencilx, grid_spacing_x, 2
+        )
 
-    m2zx = numeric_derivative_io(
-        [m[2] for m in m_xdirection], stencilx, grid_spacing_x, 2
-    )
-    m2zy = numeric_derivative_io(
-        [m[2] for m in m_ydirection], stencily, grid_spacing_y, 2
-    )
-    m2zz = numeric_derivative_io(
-        [m[2] for m in m_zdirection], stencilz, grid_spacing_z, 2
-    )
+        m2yx, _ = numeric_derivative_io(
+            [m[1] for m in m_xdirection], stencilx, grid_spacing_x, 2
+        )
+
+        m2zx, _ = numeric_derivative_io(
+            [m[2] for m in m_xdirection], stencilx, grid_spacing_x, 2
+        )
+    else:
+        m2xx, m2yx, m2zx = 0.0, 0.0, 0.0
+
+    if len(m_ydirection) > 2:
+
+        m2xy, _ = numeric_derivative_io(
+            [m[0] for m in m_ydirection], stencily, grid_spacing_y, 2
+        )
+
+        m2yy, _ = numeric_derivative_io(
+            [m[1] for m in m_ydirection], stencily, grid_spacing_y, 2
+        )
+
+        m2zy, _ = numeric_derivative_io(
+            [m[2] for m in m_ydirection], stencily, grid_spacing_y, 2
+        )
+    else:
+        m2xy, m2yy, m2zy = 0.0, 0.0, 0.0
+
+    if len(m_zdirection) > 2:
+
+        m2xz, _ = numeric_derivative_io(
+            [m[0] for m in m_zdirection], stencilz, grid_spacing_z, 2
+        )
+
+        m2yz, _ = numeric_derivative_io(
+            [m[1] for m in m_zdirection], stencilz, grid_spacing_z, 2
+        )
+
+        m2zz, _ = numeric_derivative_io(
+            [m[2] for m in m_zdirection], stencilz, grid_spacing_z, 2
+        )
+    else:
+        m2xz, m2yz, m2zz = 0.0, 0.0, 0.0
 
     return np.array(
         [m2xx + m2xy + m2xz, m2yx + m2yy + m2yz, m2zx + m2zy + m2zz], dtype=np.float64
