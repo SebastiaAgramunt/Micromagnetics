@@ -1,6 +1,10 @@
 # Micromagnetics
 A package for micromagnetism in python
 
+<!-- ![Python Versions Supported](https://img.shields.io/badge/python-3.8+-blue.svg)
+[![Pre-Commit](https://github.com/pablobd/algorithms/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/pablobd/algorithms/actions/workflows/pre-commit.yaml) -->
+
+![Lisense](https://img.shields.io/github/license/sebastiaagramunt/micromagnetics)
 
 ## Install the package
 
