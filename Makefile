@@ -14,11 +14,7 @@ COLOR_RED = \033[31m
 
 .PHONY: bootstrap # : install all requirements needed
 bootstrap:
-	pip install --upgrade pip
-	pip install -r ./pip-dep/requirements.txt
-	pip install -r ./pip-dep/requirements.test.txt
-	pip install -r ./pip-dep/requirements.notebook.txt
-	pip install -e .
+	@./scripts/setup.zsh
 
 
 .PHONY: format # : check code format
@@ -35,7 +31,9 @@ test:
 coverage:
 	pytest --cov-fail-under=80 --cov=mmag test/
 
-
+.PHONY: pre-commit # : pre-commit run
+pre-commit:
+	pre-commit run
 
 .PHONY: list # : Makefile command list
 list:
