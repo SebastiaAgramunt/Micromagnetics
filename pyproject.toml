@@ -5,7 +5,7 @@ description = "A micromagnetics python package"
 authors = ["Sebastia Agramunt Puig"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.12"
 numpy = "^1.23.1"
 
 [tool.poetry.dev-dependencies]
@@ -15,6 +15,12 @@ flake8 = "^5.0.4"
 black = "^22.6.0"
 autoflake = "^1.4"
 pre-commit = "^2.20.0"
+matplotlib = "^3.5.2"
+statsmodels = "^0.13.2"
+ipykernel = "^6.15.1"
+ipython = "^8.4.0"
+jupyterlab = "^3.4.4"
+scipy = "^1.9.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

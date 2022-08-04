@@ -1,4 +1,4 @@
-from typing import Callable, List
+from typing import Callable, List, Tuple
 
 import numpy as np
 
@@ -45,14 +45,14 @@ def derivative_coefficients(deg: int, stencil: List[float]):
         if stencil[i + 1] - stencil[i] != h:
             raise ValueError(f"stencil has to be equidistant points: {stencil}")
 
-    stencil_matrix = np.zeros((stencil_len, stencil_len), dtype=np.int64)
+    stencil_matrix = np.zeros((stencil_len, stencil_len), dtype=int)
     for i, j in [(x, y) for x in range(stencil_len) for y in range(stencil_len)]:
         stencil_matrix[i][j] = pow(stencil[j], i)
 
     stencil_matrix_inv = np.linalg.inv(stencil_matrix)
     kronecker_delta_vector = np.array(
         [0 if i != deg else np.math.factorial(deg) for i in range(stencil_len)],
-        dtype=np.int,
+        dtype=int,
     )
 
     accuracy = stencil_len - deg
@@ -62,7 +62,7 @@ def derivative_coefficients(deg: int, stencil: List[float]):
 
 def numeric_derivative(
     target_fn: FuncType, stencil: List[float], grid_spacing: float, deg: int, a: float
-) -> (float, float):
+) -> Tuple[float, float]:
     """Calculate numerical d derivative at point a using points in stencil for a
        function callale target_fn
 
@@ -96,7 +96,7 @@ def numeric_derivative(
 
 def numeric_derivative_io(
     f_eval: List[float], stencil: List[float], grid_spacing: float, deg: int
-) -> (float, float):
+) -> Tuple[float, float]:
     """Calculate numerical d derivative at point a using points in stencil for the
     evaluations of the function at the stencil points.
 
