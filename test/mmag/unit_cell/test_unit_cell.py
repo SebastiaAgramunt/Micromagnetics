@@ -1,7 +1,9 @@
 import unittest
+
 import numpy as np
-from mmag.unit_cell.fields import field_dipole
+
 from mmag.unit_cell.cell import Cuboid
+from mmag.unit_cell.fields import field_dipole
 
 _acc = 0.0001
 

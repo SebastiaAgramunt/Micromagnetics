@@ -1,7 +1,8 @@
-from mmag.exchange.numeric_derivatives import numeric_derivative_io
+from typing import List
 
 import numpy as np
-from typing import List
+
+from mmag.exchange.numeric_derivatives import numeric_derivative_io
 
 _mu0 = 1.2566370614e-6
 

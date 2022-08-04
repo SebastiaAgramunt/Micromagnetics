@@ -1,7 +1,11 @@
-import pytest
 import numpy as np
-from mmag.exchange.numeric_derivatives import derivative_coefficients
-from mmag.exchange.numeric_derivatives import numeric_derivative, numeric_derivative_io
+import pytest
+
+from mmag.exchange.numeric_derivatives import (
+    derivative_coefficients,
+    numeric_derivative,
+    numeric_derivative_io,
+)
 
 
 def round_list_elements(list_to_round, digits):

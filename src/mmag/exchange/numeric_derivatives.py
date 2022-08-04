@@ -1,5 +1,6 @@
+from typing import Callable, List
+
 import numpy as np
-from typing import List, Callable
 
 FuncType = Callable[[float], float]
 
@@ -11,12 +12,12 @@ def derivative_coefficients(deg: int, stencil: List[float]):
         deg: int -> the max degree of the derivatives
 
     Output:
-        The coefficients to calculate the derivative at one point. 
+        The coefficients to calculate the derivative at one point.
 
     Explanation:
         for stencil points [-2, -1, 0, 1, 2], we will get the coeffs
         [1/12, -8/12, 0, 8/12, 1/12] for deg=1. Correspoindg to the coefficients at
-        evaluation points for the derivative at f(x-2h)/h, f(x-h)/h, f(x)/h, 
+        evaluation points for the derivative at f(x-2h)/h, f(x-h)/h, f(x)/h,
         f(x+h)/h and f(x+2h)/h. Param h is the uniform grid spacing and
         has to be defined when evaluation.
         The coeff given by this funciton allows us to calculate the deg-derivative
@@ -62,7 +63,7 @@ def derivative_coefficients(deg: int, stencil: List[float]):
 def numeric_derivative(
     target_fn: FuncType, stencil: List[float], grid_spacing: float, deg: int, a: float
 ) -> (float, float):
-    """Calculate numerical d derivative at point a using points in stencil for a 
+    """Calculate numerical d derivative at point a using points in stencil for a
        function callale target_fn
 
     Input:
@@ -79,8 +80,8 @@ def numeric_derivative(
     Explanation:
         for stencil points [-2, -1, 0, 1, 2], we will get the coeffs
         [1/12, -8/12, 0, 8/12, 1/12] for deg=1. Correspoindg to the coefficients at
-        evaluation points for the derivative at f(a-2h)/h, f(a-h)/h, f(a)/h, 
-        f(a+h)/h and f(a+2h)/h in the derivative_coeff function, where h is the 
+        evaluation points for the derivative at f(a-2h)/h, f(a-h)/h, f(a)/h,
+        f(a+h)/h and f(a+2h)/h in the derivative_coeff function, where h is the
         grid_spacing parameter. Then, in numeric_derivative we evaluate the previous
         expression.
     """
@@ -113,14 +114,14 @@ def numeric_derivative_io(
     Explanation:
         for stencil points [-2, -1, 0, 1, 2], we will get the coeffs
         [1/12, -8/12, 0, 8/12, 1/12] for deg=1. Correspoindg to the coefficients at
-        evaluation points for the derivative at f(a-2h)/h, f(a-h)/h, f(a)/h, 
-        f(a+h)/h and f(a+2h)/h in the derivative_coeff function, where h is the 
+        evaluation points for the derivative at f(a-2h)/h, f(a-h)/h, f(a)/h,
+        f(a+h)/h and f(a+2h)/h in the derivative_coeff function, where h is the
         grid_spacing parameter. Then, in numeric_derivative we evaluate the previous
         expression taking into account that we already have the evaluation_points f_eval
 
         in a magnetization setup, if we want to calculate derivative at a point, we will
         choose for instance stencil=[-2, -1, 0, 1, 2], and grid_spacing the spacing
-        between boxes, f_eval = [m[i-2], m[i-1], m[i], m[i+1], m[i+2]] and deg the 
+        between boxes, f_eval = [m[i-2], m[i-1], m[i], m[i+1], m[i+2]] and deg the
         degree of the polynomial
     """
 

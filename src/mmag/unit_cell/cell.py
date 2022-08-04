@@ -1,6 +1,7 @@
+import numpy as np
+
 from .base import AbstractCell
 from .fields import field_rectangular_box
-import numpy as np
 
 
 class Cuboid(AbstractCell):
