@@ -19,7 +19,7 @@ matplotlib = "^3.5.2"
 statsmodels = "^0.13.2"
 ipykernel = "^6.15.1"
 ipython = "^8.10.0"
-jupyterlab = "^3.4.4"
+jupyterlab = "^3.6.7"
 scipy = "^1.9.0"
 
 [build-system]
